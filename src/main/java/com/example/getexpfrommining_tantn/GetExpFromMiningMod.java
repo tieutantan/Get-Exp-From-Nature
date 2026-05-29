@@ -11,7 +11,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
 /**
  * Mod: Get EXP from Mining
@@ -43,7 +43,7 @@ public final class GetExpFromMiningMod {
         NeoForge.EVENT_BUS.addListener(GetExpFromMiningMod::onTreeBlockBreak);
     }
 
-    private static void onStoneBlockBreak(final BlockEvent.BreakEvent event) {
+    private static void onStoneBlockBreak(final BreakBlockEvent event) {
         if (!(event.getPlayer() instanceof ServerPlayer sp)) return;
         if (event.isCanceled()) return;
         if (sp.isCreative()) return;
@@ -58,7 +58,7 @@ public final class GetExpFromMiningMod {
         }
         if (!isStoneLike) return;
 
-        final ServerLevel sl = sp.serverLevel();
+        final ServerLevel sl = sp.level();
 
         // Lấy hướng nhìn chuẩn hóa
         final Vec3 lookDir = sp.getLookAngle().normalize();
@@ -74,7 +74,7 @@ public final class GetExpFromMiningMod {
         ExperienceOrb.award(sl, spot, XP_PER_STONE_BLOCK);
     }
 
-    private static void onTreeBlockBreak(final BlockEvent.BreakEvent event) {
+    private static void onTreeBlockBreak(final BreakBlockEvent event) {
         if (!(event.getPlayer() instanceof ServerPlayer sp)) return;
         if (event.isCanceled()) return;
         if (sp.isCreative()) return;
@@ -89,7 +89,7 @@ public final class GetExpFromMiningMod {
         }
         if (!isTreeLike) return;
 
-        final ServerLevel sl = sp.serverLevel();
+        final ServerLevel sl = sp.level();
 
         // Lấy hướng nhìn chuẩn hóa
         final Vec3 lookDir = sp.getLookAngle().normalize();

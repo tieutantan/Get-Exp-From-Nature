@@ -2,7 +2,7 @@ package com.example.tantn_getexpfromnature;
 
 import java.util.List;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
@@ -29,6 +29,6 @@ public final class Config {
 
     private static boolean validateItemName(final Object obj) {
         return obj instanceof String itemName
-                && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
+                && BuiltInRegistries.ITEM.containsKey(Identifier.parse(itemName));
     }
 }
